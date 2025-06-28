@@ -1,0 +1,27 @@
+#Ci de Nivel 1 - Disparo manual a partir do 1 clique
+
+# nome do nosso 'pipeline'
+name: 'Execucao Manual'
+# regras de disparo (gatilho/trigger)
+on:
+  workflow_dispatch:
+    inputs:
+      nome:
+        description: 'Nome do pipeline'
+        required: true
+        default: 'Execucao Manual'
+
+jobs:
+ unidade:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Instalando Yarn
+        run: npm install -g yarn
+      - name: Instalar dependencias
+        run: yarn
+
+      - name: Executando testes de unidade
+        run: yarn test
